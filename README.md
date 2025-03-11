@@ -1,6 +1,6 @@
-# O-1A Visa Assessment API
+# Alma Assessment
 
-A FastAPI application that analyzes CVs against O-1A visa criteria using Google's Gemini AI to provide a preliminary assessment of an applicant's qualification.
+A FastAPI application that analyzes CVs against O-1A visa criteria using Google's Gemini to provide a preliminary assessment of an applicant's qualification.
 
 ## Project Overview
 
