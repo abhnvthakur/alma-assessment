@@ -27,7 +27,7 @@ The application evaluates CVs against these eight criteria:
 
 ## System Design
 
-The application follows a straightforward flow:
+The application follows the following flow:
 
 1. **Input Processing**: Accepts and processes CV files through a FastAPI endpoint
 2. **Text Extraction**: Extracts text content from PDF or DOCX files
@@ -97,26 +97,70 @@ Upload a CV for assessment.
 **Request**:
 - `file`: PDF or DOCX file (required)
 
-**Response**:
+**Response**: (for the sample_cv in the repo)
 ```json
 {
-  "assessment_id": "uuid",
-  "criteria_results": {
-    "awards": { 
-      "matches": ["Award 1", "Award 2"], 
-      "met": true, 
-      "confidence": 0.85 
+    "assessment_id": "3a8d4189-9a05-4a35-bd24-b1f22362080d",
+    "criteria_results": {
+        "awards": {
+            "matches": [
+                "Gold - Math Olympiad IIT Kharagpur",
+                "Gold - Team Member - DevRev High Prep Event IIT Madras",
+                "Silver - Team Captain - ISRO High Prep Event IIT Bombay"
+            ],
+            "met": true,
+            "confidence": 0.8
+        },
+        "membership": {
+            "matches": [],
+            "met": false,
+            "confidence": 0.95
+        },
+        "press": {
+            "matches": [],
+            "met": false,
+            "confidence": 0.95
+        },
+        "judging": {
+            "matches": [],
+            "met": false,
+            "confidence": 0.9
+        },
+        "original_contribution": {
+            "matches": [
+                "Implemented Multi-Scale Feature Fusion, CoordConv, and adversarial training utilizing the Fast Gradient Sign Method in NovaNet, a novel method for enhanced pothole detection.",
+                "Developed a method to rank topics based on preference weights in a semantic analysis project to determine citizens’ voting preferences.",
+                "Built a custom prompting template, reducing overall token costs by 30% in a project focused on prompt compression and evaluation of RAG-based models."
+            ],
+            "met": true,
+            "confidence": 0.7
+        },
+        "scholarly_articles": {
+            "matches": [
+                "RTaC: A Generalised Framework for Tooling",
+                "NovaNet: A Novel Method for Enhanced Pothole Detection"
+            ],
+            "met": true,
+            "confidence": 0.8
+        },
+        "critical_employment": {
+            "matches": [
+                "Advisor/Executive Head of Kharagpur Data Analytics Group, conducting national level hackathons and bootcamps, achieving an 82% YoY participation increase in Kharagpur Data Science Hackathon with over 5500 unique participants",
+                "Senate Member/General Secretary Technology of Acharya Jagadish Chandra Bose Hall of Residence, coordinating technology activities and managing INR 200,000 in funds",
+                "Lead 10 teams of over 100 members across Inter-Hall events such as Biz-Tech Quiz, Case Study and Data Hackathon"
+            ],
+            "met": true,
+            "confidence": 0.8
+        },
+        "high_remuneration": {
+            "matches": [],
+            "met": false,
+            "confidence": 0.95
+        }
     },
-    "membership": { 
-      "matches": [], 
-      "met": false, 
-      "confidence": 0.2 
-    },
-    ...
-  },
-  "criteria_met": 3,
-  "qualification_rating": "medium",
-  "explanation": "The candidate meets 3 out of 8 criteria required for O-1A visa qualification."
+    "criteria_met": 4,
+    "qualification_rating": "medium",
+    "explanation": "The candidate meets 4 out of 8 criteria required for O-1A visa qualification."
 }
 ```
 
@@ -138,7 +182,7 @@ Check if the API is running and the Gemini API is accessible.
 
 The application can extract text from both PDF and DOCX files using PyPDF2 and python-docx libraries, allowing for flexibility in document formats.
 
-### AI Model Selection
+### Model Selection
 
 Google's Gemini 1.5 Flash model was chosen for its:
 - Ability to understand complex text
@@ -179,16 +223,3 @@ When evaluating results:
 - Results may vary based on how well the CV articulates achievements
 - Technical terminology and domain-specific language may impact accuracy
 - The AI model may occasionally misinterpret complex achievements
-
-## Troubleshooting
-
-If you encounter issues:
-
-1. Verify your Gemini API key is correct and active
-2. Check that the selected model (`gemini-1.5-flash`) is available in your Google AI account
-3. Ensure your PDF or DOCX files are not password-protected or corrupted
-4. For PDF extraction issues, try using a different PDF converter or text extraction method
-
-## License
-
-[Include your license information here]
