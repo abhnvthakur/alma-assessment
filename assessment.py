@@ -19,7 +19,7 @@ from docx import Document
 import google.generativeai as genai
 
 app = FastAPI(title="O-1A Visa Assessment API")
-GOOGLE_API_KEY = "enter_key"  # Replace with your actual API key
+GOOGLE_API_KEY = "GOOGLE_API_KEY"  # Replace with your actual API key
 
 # Configure Gemini API
 def setup_gemini_api():
